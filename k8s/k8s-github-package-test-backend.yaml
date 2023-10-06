@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: k8s-github-package-test-deployment
+  name: k8s-github-package-test-backend-deployment
   labels:
-    app: k8s-github-package-test
+    app: k8s-github-package-test-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: k8s-github-package-test
+      app: k8s-github-package-test-backend
   template:
     metadata:
       labels:
-        app: k8s-github-package-test
+        app: k8s-github-package-test-backend
     spec:
       containers:
-        - name: k8s-github-package-test
-          image: ghcr.io/tuvsheezz/k8s-github-package-test:main
+        - name: k8s-github-package-test-backend
+          image: ghcr.io/tuvsheezz/k8s-github-package-test-backend:main
           ports:
             - containerPort: 8000
       imagePullSecrets:
@@ -25,13 +25,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: k8s-github-package-test-service
+  name: k8s-github-package-test-backend-service
 spec:
   selector:
-    app: k8s-github-package-test
-  type: LoadBalancer
+    app: k8s-github-package-test-backend
+  type: ClusterIP
   ports:
     - protocol: TCP
       port: 8000
       targetPort: 8000
-      nodePort: 30000
