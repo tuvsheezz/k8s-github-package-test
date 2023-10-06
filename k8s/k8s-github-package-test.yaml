@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: k8s-github-package-test
-          image: ghcr.io/tuvsheezz/k8s-github-package-test:main
+          image: ghcr.io/tuvsheezz/k8s-github-package-test:python_app
           ports:
             - containerPort: 8000
       imagePullSecrets:
