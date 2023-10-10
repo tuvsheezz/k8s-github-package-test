@@ -29,7 +29,7 @@ metadata:
 spec:
   selector:
     app: k8s-github-package-test-frontend
-  type: LoadBalancer
+  type: NodePort
   ports:
     - protocol: TCP
       port: 80
