@@ -6,6 +6,7 @@ export default function App() {
 
   useEffect(() => {
     axios.get("http://k8s-github-package-test-backend-service.default.svc.cluster.local:8000/api/hello").then((response) => setText(response.data.data));
+    axios.get("https://api.publicapis.org/entries").then((response) => console.log(response.data));
   }, []);
 
   return (
