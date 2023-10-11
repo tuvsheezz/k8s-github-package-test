@@ -1,6 +1,4 @@
-FROM node:18.18.0-alpine as build
-
-ENV NODE_ENV production
+FROM node:18.18.0-alpine
 
 WORKDIR /usr/src/app
 COPY package*.json ./
@@ -9,11 +7,9 @@ RUN npm install
 
 COPY . .
 
+ENV NODE_ENV=production
+ENV PORT=8080
 RUN npm run build
 
-FROM nginx:latest
-COPY --from=build /usr/src/app/dist /usr/share/nginx/html
-COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
-
+EXPOSE 8080
+CMD ["npm", "run", "prod"]
