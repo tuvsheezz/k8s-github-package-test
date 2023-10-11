@@ -1,15 +1,19 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react'
 
-export default function App() {
+function App() {
   const [text, setText] = useState<string | null>(null);
 
+  const BASE_URL = 'http://k8s-github-package-test-backend-service.default.svc.cluster.local:8000'
+  // const BASE_URL = 'http://localhost:8000'
+
   useEffect(() => {
-    axios.get("http://k8s-github-package-test-backend-service.default.svc.cluster.local:8000/api/hello").then((response) => setText(response.data.data));
-    axios.get("https://api.publicapis.org/entries").then((response) => console.log(response.data));
+    axios.get(`${BASE_URL}/api/hello`).then((response) => setText(response.data.data));
   }, []);
 
   return (
     <p>{text ? text : "Loading..."}</p>
   )
 }
+
+export default App
